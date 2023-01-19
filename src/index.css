@@ -7,11 +7,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 14px;
   font-weight: 300;
+
+  background: FFFFFF;
+  color: #1C0D33;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container{
+  margin: 0 8vw;
+}
+
+.pageTitle{
+  font-size: 48px;
+  font-weight: 800;
 }
 
 table, th, td {
@@ -19,12 +26,10 @@ table, th, td {
   border-collapse: collapse;
 }
 
-.roomName{
-  font-size: 1em;
-}
-
-.roomName:hover{
-  cursor: pointer;
+.tableHeader{
+  font-size: 18px;
+  background: #4E295B;
+  color: #FFF;
 }
 
 a{
@@ -45,4 +50,16 @@ a:hover{
   position: absolute;
   top: 10%;
   right: 10%;
+}
+
+.reserved{
+  background: #FFD3C3;
+}
+
+.free{
+  background: #A2BBFC;
+}
+
+.roomDate:hover{
+  cursor: pointer;
 }

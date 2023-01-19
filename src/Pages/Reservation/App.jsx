@@ -50,25 +50,18 @@ function Reservation() {
 
     function handleRoomReservation(currentRoom, key, value) {
       let newState
-
       reserved[key] === false ? setReserved({...reserved, [key]: true}) : setReserved({...reserved, [key]: false});
-
       currentRoom[key] === "libre" ? currentRoom[key] = "occupé" : currentRoom[key] = "libre"
       currentRoom[key] === "occupé" ? newState = "occupé" : newState = "libre"
-
       let workbook = globalWorkbook["workbook"];
       let sheet = workbook.Sheets[workbook.SheetNames[0]];
       let rooms = XLSX.utils.sheet_to_json(sheet);
-
-      
       rooms.splice(currentRoom["id"], 1, currentRoom);
-      
       workbook.Sheets[workbook.SheetNames[0]] = XLSX.utils.json_to_sheet(rooms)
-
       setGlobalWorkbook(globalWorkbook => ({
         workbook
       }));
-
+      console.log(this);
     }
     
     function updateFile() {
@@ -79,7 +72,7 @@ function Reservation() {
 
     return (
         <>
-        <h1>HELLO {}</h1>
+        <h1 className="pageTitle">HELLO {}</h1>
         <input type="file" id="file-input" accept=".xlsx" />
         <div>
           <h1>{currentRoom.salle}</h1>
@@ -94,7 +87,7 @@ function Reservation() {
               <tr>
 
               { Object.entries(currentRoom).map(([key, value]) => (
-                <th key={key} className="roomDate" onClick={() => handleRoomReservation(currentRoom, key, value)}>{value}</th>
+                <th key={key} className={value == "libre" ? "free roomDate" : "" + value == "occupé" ? "reserved roomDate" : ""} onClick={() => handleRoomReservation(currentRoom, key, value)}>{value}</th>
                 ))
               } 
               </tr>

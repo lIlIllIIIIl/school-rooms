@@ -12,18 +12,18 @@ function Home() {
   let x = 0
       const [rooms, setRooms] = useState([]);
       const [selectedRoom, setSelectedRoom] = useState(null);
-      // const [count, setCount] = useState(0);
       const [reservation, setReservation] = useState({
         name: '',
         startTime: '',
         endTime: '',
       });
-    
       useEffect(() => {
         const fileInput = document.getElementById('file-input');
         fileInput.addEventListener('change', handleFileChange);
       }, []);
     
+      // let isReserved = this.content = "occupé";
+
       function handleFileChange(event) {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -57,94 +57,53 @@ function Home() {
         event.preventDefault();
       }
 
+      function jsp(){
+        console.log(this);
+      }
 
+      function jsp(v){
+        console.log(v);
+      }
     
     return (
         <>
-        <h1>Rooms</h1>
-        <div className="room-reservation">
-            <input type="file" id="file-input" accept=".xlsx" />
-            <div className="room-list">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Id</th>
-                        <th>Salle</th>
-                        <th>Date 1</th>
-                        <th>Date 2</th>
-                        <th>Date 3</th>
-                        <th>Date 4</th>
-                        <th>Date 5</th>
-                        <th>Date 6</th>
-                        <th>Date 7</th>
-                        <th>Date 8</th>
-                        <th>Date 9</th>
-                    </tr>
-                    {/* easy way *_* */}
-                    {/* {rooms.map(room => (
-                        <tr key={room.id}>
-                            <th className='roomName' onClick={() => handleRoomSelection(room)}> <a href={`/Reservation/${room.salle}`}>{room.salle}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date1}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date2}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date3}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date4}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date5}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date6}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date7}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date8}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date9}</a></th>
-                        </tr>
-                    ))} */}
-                      { Object.entries(rooms).map(([key, value]) => (
-                        <tr>
-                          {
-                          Object.entries(value).map(([roomKey, roomValue]) => (
-                            <th className="roomName" onClick={() => handleRoomSelection(roomValue)}>
-                              <a href={`Reservation/${value.salle}`}>{roomValue}</a>
-                              </th>
-                          ))
-                          }
-                    </tr>
-                      )) }
+        <div className='container'>
+          <h1 className='pageTitle'>Rooms</h1>
+          <div className="room-reservation">
+              <input type="file" id="file-input" accept=".xlsx" />
+              <div className="room-list">
+                  <table>
+                      <tbody>
+                      <tr>
+                          <th className='tableHeader'>Id</th>
+                          <th className='tableHeader'>Salle</th>
+                          <th className='tableHeader'>Date 1</th>
+                          <th className='tableHeader'>Date 2</th>
+                          <th className='tableHeader'>Date 3</th>
+                          <th className='tableHeader'>Date 4</th>
+                          <th className='tableHeader'>Date 5</th>
+                          <th className='tableHeader'>Date 6</th>
+                          <th className='tableHeader'>Date 7</th>
+                          <th className='tableHeader'>Date 8</th>
+                          <th className='tableHeader'>Date 9</th>
+                      </tr>
+                        { Object.entries(rooms).map(([key, value]) => (
+                          <tr>
+                            {
+                            Object.entries(value).map(([roomKey, roomValue]) => (
+                              <th className={roomValue == "libre" ? "free" : "" + roomValue == "occupé" ? "reserved" : ""} onClick={() => handleRoomSelection(roomValue)}>
+                                <a href={`Reservation/${value.salle}`}>{roomValue}</a>
+                                </th>
+                            ))
+                            }
+                            
+                      </tr>
+                        )) }
 
-                    </tbody>
-                </table>
-            </div>
-            {/* {selectedRoom && (
-  <div className="reservation-form">
-    <h2>Reserve {selectedRoom.name}</h2>
-    <form onSubmit={handleReservationSubmit}>
-      <label>
-        Name:
-        <input
-          type="text"
-          name="name"
-          value={reservation.name}
-          onChange={handleReservationChange}
-        />
-      </label>
-      <label>
-        Start Time:
-        <input
-          type="text"
-          name="startTime"
-          value={reservation.startTime}
-          onChange={handleReservationChange}
-        />
-      </label>
-      <label>
-        End Time:
-        <input
-          type="text"
-          name="endTime"
-          value={reservation.endTime}
-          onChange={handleReservationChange}
-        />
-      </label>
-      <button type="submit">Reserve</button>
-    </form>
-  </div>
-)} */}
+                      </tbody>
+                  </table>
+              </div>
+          </div>
         </div>
         </>
     );
