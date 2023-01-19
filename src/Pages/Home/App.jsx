@@ -9,6 +9,7 @@ import {
 import XLSX from 'xlsx';
 
 function Home() {    
+  let x = 0
       const [rooms, setRooms] = useState([]);
       const [selectedRoom, setSelectedRoom] = useState(null);
       // const [count, setCount] = useState(0);
@@ -36,7 +37,9 @@ function Home() {
         const sheet = workbook.Sheets[workbook.SheetNames[0]];
         const rooms = XLSX.utils.sheet_to_json(sheet);
         setRooms(rooms);
-        console.log(rooms);
+
+        // B5 = {c:1, r:4}
+
       }
     
       function handleRoomSelection(room) {
@@ -65,6 +68,7 @@ function Home() {
                 <table>
                     <tbody>
                     <tr>
+                        <th>Id</th>
                         <th>Salle</th>
                         <th>Date 1</th>
                         <th>Date 2</th>
@@ -76,20 +80,33 @@ function Home() {
                         <th>Date 8</th>
                         <th>Date 9</th>
                     </tr>
-                    {rooms.map(room => (
+                    {/* easy way *_* */}
+                    {/* {rooms.map(room => (
                         <tr key={room.id}>
-                            <th className='roomName' onClick={() => handleRoomSelection(room)}> <a href={`/Reservetion/:${room.salle}`}>{room.salle}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date1}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date2}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date3}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date4}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date5}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date6}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date7}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date8}</a></th>
-                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservetion/:${room.salle}`}>{room.date9}</a></th>
+                            <th className='roomName' onClick={() => handleRoomSelection(room)}> <a href={`/Reservation/${room.salle}`}>{room.salle}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date1}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date2}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date3}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date4}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date5}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date6}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date7}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date8}</a></th>
+                            <th onClick={() => handleRoomSelection(room)}><a href={`/Reservation/${room.salle}`}>{room.date9}</a></th>
                         </tr>
-                    ))}
+                    ))} */}
+                      { Object.entries(rooms).map(([key, value]) => (
+                        <tr>
+                          {
+                          Object.entries(value).map(([roomKey, roomValue]) => (
+                            <th className="roomName" onClick={() => handleRoomSelection(roomValue)}>
+                              <a href={`Reservation/${value.salle}`}>{roomValue}</a>
+                              </th>
+                          ))
+                          }
+                    </tr>
+                      )) }
+
                     </tbody>
                 </table>
             </div>

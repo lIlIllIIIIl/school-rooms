@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import XLSX from 'xlsx';
 
-import Reservation from './Pages/handleReservation/App';
+import Reservation from './Pages/Reservation/App';
 import Home from './Pages/Home/App';
 
 function render() {
@@ -17,7 +17,7 @@ function render() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Reservation/:name" element={<Reservation />} />
+          <Route path="/Reservation/:roomName" element={<Reservation />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

@@ -20,7 +20,11 @@ table, th, td {
 }
 
 .roomName{
-  font-size: 1.2em;
+  font-size: 1em;
+}
+
+.roomName:hover{
+  cursor: pointer;
 }
 
 a{
@@ -30,4 +34,15 @@ a{
 
 a:hover{
   text-decoration: underline;
+}
+
+.roomDate:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.homeLink{
+  position: absolute;
+  top: 10%;
+  right: 10%;
 }
